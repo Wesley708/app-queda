@@ -47,10 +47,12 @@ const unsubscribe = () => {
     }
   };
 
-  const alertFall = (location:Location.LocationObject) => {
+  const alertFall = async(location:Location.LocationObject) => {
+    
+    let endereco = await Location.reverseGeocodeAsync(location.coords)
     Alert.alert(
       "Queda Detectada",
-      `Uma queda foi detectada. Localização: ${location.coords.latitude}, ${location.coords.longitude}`,
+      `Uma queda foi detectada. Endereço: ${endereco[0].city} Localização: ${location.coords.latitude}, ${location.coords.longitude}`,
       [{ text: "OK" }]
     );
   };
